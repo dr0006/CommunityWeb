@@ -1,0 +1,39 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/10/29 18:21-->
+<!--Filename: inbox.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <section>
+        <h2>Inbox</h2>
+
+        <!-- Display the conversation -->
+        <ul>
+            {% for message in latest_conversation %}
+                <li>
+                    <h3>{{ message.sender.username }}</h3>
+                    <p>{{ message.content }}</p>
+                    <p>Sent on: {{ message.timestamp }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Pagination navigation -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if latest_conversation.has_previous %}
+                    <a href="?page=1">&laquo; First Page</a>
+                    <a href="?page={{ latest_conversation.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                <span class="current-page">Page {{ latest_conversation.number }}</span>
+
+                {% if latest_conversation.has_next %}
+                    <a href="?page={{ latest_conversation.next_page_number }}">Next</a>
+                    <a href="?page={{ latest_conversation.paginator.num_pages }}">Last Page &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </section>
+{% endblock %}

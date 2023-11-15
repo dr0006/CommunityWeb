@@ -1,0 +1,51 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/10/29 17:17-->
+<!--Filename: hot_topic.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <section>
+        <h2>热门主题</h2>
+        <!-- 添加“发布帖子”按钮 -->
+        <button><a href="{% url 'add_topic' %}">发布帖子</a></button>
+        <button><a href="{% url 'forum' %}">最新发布</a></button>
+        <!--根据评论数来排序 -->
+        <button><a href="{% url 'hot_topic' %}">最热话题</a></button>
+        <button><a href="{% url 'my_topic' %}">我的发布</a></button>
+        <ul>
+            {% for topic in latest_topic %}
+                <li>
+                    <h3>标题:{{ topic.title }}</h3>
+                    <p>文章描述:{{ topic.desc_topic }}</p>
+                    {#                    <p>内容:{{ topic.content }}</p>#}
+                    <p>作者: {{ topic.author }}</p>
+                    <p>分类: {{ topic.category.name }}</p>
+                    <p>发布时间: {{ topic.time }}</p>
+                    <p>评论数量: {{ topic.remarks }}</p>
+                    <p>浏览次数: {{ topic.views }}</p>
+                    <!-- 添加“查看详情”按钮 -->
+                    <a class="btn btn-info" href="{% url 'topic' topic.id %}">查看详情</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- 分页导航 -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if latest_topic.has_previous %}
+                    <a href="?page=1">&laquo; 第一页</a>
+                    <a href="?page={{ latest_topic.previous_page_number }}">上一页</a>
+                {% endif %}
+
+                <span class="current-page">第 {{ latest_topic.number }} 页</span>
+
+                {% if latest_topic.has_next %}
+                    <a href="?page={{ latest_topic.next_page_number }}">下一页</a>
+                    <a href="?page={{ latest_topic.paginator.num_pages }}">最后一页 &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </section>
+{% endblock %}

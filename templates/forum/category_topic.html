@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+<!-- category.html -->
+
+{% block content %}
+    <section class="forum-section">
+        <h2>话题列表</h2>
+
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'category' 1 %}">产业振兴</a></li>
+                    <li><a href="{% url 'category' 2 %}">人才振兴</a></li>
+                    <li><a href="{% url 'category' 3 %}">文化振兴</a></li>
+                    <li><a href="{% url 'category' 4 %}">生态振兴</a></li>
+                    <li><a href="{% url 'category' 5 %}">组织振兴</a></li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <ul class="topic-list">
+                    {% for topic in topics %}
+                        <li class="topic-item">
+                            <h3 class="topic-title">{{ topic.title }}</h3>
+                            <p class="topic-content">{{ topic.content }}</p>
+                            <p class="topic-info">作者: {{ topic.author }}</p>
+                            <p class="topic-info">分类: {{ topic.category.name }}</p>
+                            <p class="topic-info">发布时间: {{ topic.time }}</p>
+                            <p class="topic-info">评论数: {{ topic.remarks }}</p>
+                            <p class="topic-info">浏览次数: {{ topic.views }}</p>
+                            <a class="btn btn-info" href="{% url 'topic' topic.id %}">查看详情</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}

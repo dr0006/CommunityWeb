@@ -1,0 +1,22 @@
+<!-- login.html -->
+<!-- 继承 base.html 模板 -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Login</h2>
+
+    {% if login_err %}
+        <p>{{ login_err }}</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">用户名：</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">密码：</label>
+        <input type="password" id="password" name="password" required><br>
+        <input type="submit" value="登录">
+    </form>
+
+    <button><a href="{% url 'password_reset' %}">忘记密码？</a></button>
+{% endblock %}

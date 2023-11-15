@@ -1,0 +1,26 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/11/15 18:05-->
+<!--Filename: search_case_results.html -->
+{% extends 'excellentCase/base.html' %}
+
+{% block title %}搜索结果{% endblock %}
+
+{% block content %}
+    <h2>搜索优秀案例结果</h2>
+    <p>显示与关键字 "{{ query }}" 相关的优秀案例：</p>
+    <br>
+
+    {% for result in results %}
+        <div class="case-item">
+            <h3 class="case-title">{{ result.title }}</h3>
+            <p class="case-info">分类: {{ result.category }}</p>
+            <p class="case-info">村庄: {{ result.village_info }}</p>
+            <p class="case-info">简短说明: {{ result.description }}</p>
+            <a class="btn btn-info" href="{% url 'case_detail' result.id %}">查看详情</a>
+        </div>
+        <br>
+    {% empty %}
+        <p>没有找到相关结果。</p>
+    {% endfor %}
+{% endblock %}

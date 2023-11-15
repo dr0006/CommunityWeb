@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section>
+        <h2>我发布的帖子</h2>
+        <!-- 添加“发布帖子”按钮 -->
+        <button><a href="{% url 'add_topic' %}">发布帖子</a></button>
+        <button><a href="{% url 'forum' %}">最新发布</a></button>
+        <!--根据评论数来排序 -->
+        <button><a href="{% url 'hot_topic' %}">最热话题</a></button>
+        <button><a href="{% url 'my_topic' %}">我的发布</a></button>
+        <ul>
+            {% for topic in user_topics %}
+                <li>
+                    <h3>标题:{{ topic.title }}</h3>
+                    <p>文章描述:{{ topic.desc_topic }}</p>
+                    <p>作者: {{ topic.author }}</p>
+                    <p>分类: {{ topic.category.name }}</p>
+                    <p>发布时间: {{ topic.time }}</p>
+                    <p>评论数: {{ topic.remarks }}</p>
+                    <p>浏览次数: {{ topic.views }}</p>
+{#                    <p>文章内容:{{ topic.content }}</p>#}
+                    <a class="btn btn-info" href="{% url 'topic' topic.id %}">查看详情</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

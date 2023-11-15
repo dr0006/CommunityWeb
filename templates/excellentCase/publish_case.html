@@ -1,0 +1,24 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/11/14 18:31-->
+<!--Filename: publish_case.html -->
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="container">
+        <h2 class="mt-3">发布优秀案例</h2>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button type="submit" class="btn btn-primary">发布</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

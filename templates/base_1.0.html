@@ -1,0 +1,49 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/10/26 22:07-->
+<!--Filename: base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}乡村振兴社交平台{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+
+</head>
+<body>
+<header>
+    <h1>乡村振兴社交平台</h1>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+                <!-- 如果用户已登录 -->
+                <li><a href="{% url 'community' %}">主页</a></li>
+                <li><a href="{% url 'user_info' %}">个人资料</a></li>
+                <li><a href="{% url 'logout' %}">登出</a></li>
+                <li><a href="{% url 'forum' %}">交流圈子</a></li>>
+                <li><a href="{% url 'inbox' %}">收件箱</a></li>>
+            {% else %}
+                <!-- 如果用户未登录 -->
+                <li><a href="{% url 'login' %}">登录</a></li>
+                <li><a href="{% url 'register' %}">注册</a></li>
+            {% endif %}
+
+            <li><a href="{% url 'about' %}">关于我们</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p>&copy; 2023 乡村振兴社交平台</p>
+</footer>
+</body>
+</html>

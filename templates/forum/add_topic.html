@@ -1,0 +1,16 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/10/29 15:40-->
+<!--Filename: add_topic.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <section>
+        <h2>Add a New Topic</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} {# 添加 CSRF 令牌 #}
+            {{ form.as_p }} {# 使用表单字段渲染表单 #}
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+{% endblock %}

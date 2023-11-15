@@ -1,0 +1,15 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/10/29 14:03-->
+<!--Filename: edit_profile.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>编辑个人资料</h1>
+    <form method="post" enctype="multipart/form-data">  <!-- 添加enctype属性以处理文件上传 -->
+        {% csrf_token %}
+        {{ user_info_form.as_p }}
+        <button type="submit">保存</button>
+    </form>
+{% endblock %}
+

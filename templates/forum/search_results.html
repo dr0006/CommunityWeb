@@ -1,0 +1,24 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/11/15 17:59-->
+<!--Filename: search_results.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>搜索结果</h2>
+    <p>显示与关键字 "{{ query }}" 相关的结果：</p>
+
+    {% for result in results %}
+        <div class="topic-item">
+            <h3 class="topic-title">{{ result.title }}</h3>
+            <p class="topic-info">作者: {{ result.author }}</p>
+            <p class="topic-info">分类: {{ result.category.name }}</p>
+            <p class="topic-info">发布时间: {{ result.time }}</p>
+            <p class="topic-info">评论数: {{ result.remarks }}</p>
+            <p class="topic-info">浏览次数: {{ result.views }}</p>
+            <a class="btn btn-info" href="{% url 'topic' result.id %}">查看详情</a>
+        </div>
+    {% empty %}
+        <p>没有找到相关结果。</p>
+    {% endfor %}
+{% endblock %}

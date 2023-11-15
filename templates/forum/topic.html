@@ -1,0 +1,45 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/10/29 16:46-->
+<!--Filename: topic.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <section>
+        <h3>标题: {{ topic.title }}</h3>
+        <p>文章描述: {{ topic.desc_topic }}</p>
+        <p>作者: {{ topic.author }}</p>
+        <p>分类: {{ topic.category.name }}</p>
+        <p>发布时间: {{ topic.time }}</p>
+        <p>最后修改时间: {{ topic.pub_date }}</p>
+        <p>文章内容:{{ topic.content }}</p>
+        <p>评论数量: {{ topic.remarks }}</p>
+        <p>浏览次数: {{ topic.views }}</p>
+    </section>
+
+    <!-- 显示主题的评论 -->
+    <section>
+        <h3>评论</h3>
+        <ul>
+            {% for comment in topic.topiccomment_set.all %}
+                <li>
+                    <img src="{{ comment.author.image.url }}" alt="User Avatar" style="width: 70px; height: 70px;">
+                    <!-- 显示评论作者的头像 -->
+                    <p>{{ comment.body }}</p>
+                    <p>作者: {{ comment.author }}</p>
+                    <p>评论时间: {{ comment.time }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- 添加评论表单 -->
+    <section>
+        <h3>添加评论</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">提交评论</button>
+        </form>
+    </section>
+{% endblock %}

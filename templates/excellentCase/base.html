@@ -1,0 +1,165 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/11/14 18:58-->
+<!--Filename: base.html -->
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>
+<html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>
+<html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}乡创智联{% endblock %}</title>
+    {#    单独引入css留空块#}
+    {% block additional_css %}{% endblock %}
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/zerogrid.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsiveslides.css' %}">
+    <!-- other style links -->
+
+    <!-- IE compatibility -->
+    <!--[if lt IE 8]>
+    <div style=' clear: both; text-align:center; position: relative;'>
+        <a href="http//windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+            <img src="http//storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0"
+                 height="42" width="820"
+                 alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/>
+        </a>
+    </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="{% static 'js/html5.js' %}"></script>
+    <script src="{% static 'js/css3-mediaqueries.js' %}"></script>
+    <![endif]-->
+
+    <!-- Favicon -->
+    <link href='../../static/ico/' rel='icon' type='image/x-icon'/>
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/responsiveslides.js' %}"></script>
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                pager: true,
+                nav: true,
+                speed: 500,
+                maxwidth: 800,
+                namespace: "centered-btns"
+            });
+        });
+    </script>
+</head>
+<body>
+<header>
+    <div class="zerogrid">
+        <div class="row">
+            <!-- Logo Section -->
+            <div class="col05">
+                <div id="logo"><a href=""><img src="{% static 'images/logoaa.png' %}" alt=""/></a></div>
+            </div>
+            <!-- Search Box Section -->
+            <div class="col06 offset05">
+                <div id='search-box'>
+                    <form action='{% url "search_case" %}' id='search-form' method='get' target='_top'>
+                        <label for='search-text'></label>
+                        <input id='search-text' name='q' placeholder='输入关键字' type='text'
+                               value="{{ request.GET.q }}">
+                        <button id='search-button' type='submit'><span>搜索</span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="{% url 'main_page' %}">主页</a></li>
+        <li><a href="{% url 'community' %}">求助发布</a></li>
+        <li><a href="{% url 'case_list' %}">优秀案例</a></li>
+        <li><a href="#">资源共享</a></li>
+        <li><a href="#">专家在线</a></li>
+        <li><a href="#">产品展示</a></li>
+        <li><a href="#">众筹平台</a></li>
+        <li><a href="#">教育培训</a></li>
+
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'user_logout' %}">退出</a></li>
+            <li><span>欢迎，{{ user.username }}</span></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">登录</a></li>
+            <li><a href="{% url 'register' %}">注册</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+
+<!-- Content Section -->
+<section id="content">
+    {% block content %}{% endblock %}
+</section>
+
+<!-- Footer Section -->
+<footer>
+    <div class="zerogrid">
+        <div class="row">
+            <!-- Feedback Section -->
+            <section class="col-1-3">
+                <div class="heading">评价反馈</div>
+                <div class="content">
+                    如果建议 <a style="color: black;" href="">点击这里</a> 如果吐槽<a style="color: black;"
+                                                                                      href="">点击这里</a>
+                </div>
+            </section>
+            <!-- Contact Us Section -->
+            <section class="col-1-3">
+                <div class="heading">联系我们</div>
+                <div class="content">
+                    <ul>
+                        <li><a href="http//即刻工作室">电话</a></li>
+                        <li><a href="http//即刻工作室">地址</a></li>
+                        <li><a href="http//即刻工作室">邮箱</a></li>
+                        <li><a href="http//即刻工作室">微信</a></li>
+                        <li><a href="http//即刻工作室">qq</a></li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Partner Units Section -->
+            <section class="col-1-3">
+                <div class="heading">合作单位</div>
+                <div class="content">
+                    <table border="0px">
+                        <tr>
+                            <td><img src="{% static 'images/2huihui.jpg' %}" alt=""/></td>
+                            <td><img src="{% static 'images/2huihui.jpg' %}" alt=""/></td>
+                            <td><img src="{% static 'images/2huihui.jpg' %}" alt=""/></td>
+                        </tr>
+                        <tr>
+                            <td><img src="{% static 'images/2huihui.jpg' %}" alt=""/></td>
+                            <td><img src="{% static 'images/2huihui.jpg' %}" alt=""/></td>
+                            <td><img src="{% static 'images/2huihui.jpg' %}" alt=""/></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</footer>
+
+<!-- Copyright Section -->
+<div id="copyright">
+    <p>Copyright © 2023 - yeyeyeyye</p>
+    <p>sdfafdafdsagsafdsgasfdfafsdfafsafafasf</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/11/14 18:54-->
+<!--Filename: case_list.html -->
+<!-- case_detail.html -->
+{% extends "excellentCase/base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <h2 class="mt-3">案例详情</h2>
+        <hr>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card" style="display: flex;">
+                    <div class="card-body" style="flex-grow: 1; padding: 1rem;">
+                        <h5 class="card-title">案例标题：{{ case.title }}</h5>
+                        <p class="card-text">村庄名字：{{ case.village_info.village_name }}</p>
+                        <p class="card-text">案例简介说明：{{ case.description }}</p>
+
+
+                        <p class="card-text">详细经验说明：{{ case.experience }}</p>
+
+                        <!-- 展示村庄基本信息 -->
+                        <p class="card-text">所在省份：{{ case.village_info.province }}</p>
+                        <p class="card-text">人口体量：{{ case.village_info.population }}</p>
+                        <p class="card-text">资源禀赋：{{ case.village_info.resources }}</p>
+                        <p class="card-text">主要产业：{{ case.village_info.industry }}</p>
+                        <p class="card-text">地形：{{ case.village_info.terrain }}</p>
+                        <p class="card-text">村庄规模：{{ case.village_info.village_size }}</p>
+                        <p class="card-text">年平均收入：{{ case.village_info.avg_income }}</p>
+
+                        <a href="{% url 'case_list' %}" class="btn btn-secondary">返回案例列表</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block additional_css %}
+    <!-- 在这里引入单独的 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/case_detail.css' %}">
+{% endblock %}
